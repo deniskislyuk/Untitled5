@@ -7,12 +7,12 @@ public class Constant {
 
 
 
-        public static final String REGRES_PAGE = "https://kdbo-reg.skblab.ru/login";
-        public static final String TEST_PAGE = "https://kdbo-test.skblab.ru/login";
+        public static final String REGRES_PAGE = "https://www.onliner.by/";
+        public static final String TEST_PAGE = "https://www.onliner.by/";
 
 
 
-        public static final String LOGIN = "946409";   //946409
-        public static final String PASSWORD = "1234";
+        public static final String LOGIN = "deniskislyuk@gmail.com";   //946409
+        public static final String PASSWORD = "Zltybc858";
 
 }

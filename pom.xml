@@ -42,7 +42,7 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <suiteXmlFiles>./src/test/resources/${testngXML}</suiteXmlFiles>
+                    <suiteXmlFiles></suiteXmlFiles>
                 </configuration>
             </plugin>
         </plugins>
@@ -91,12 +91,4 @@
 
 
     </dependencies>
-
-
-
-
-
-
-
-
 </project>

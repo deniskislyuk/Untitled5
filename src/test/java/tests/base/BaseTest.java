@@ -7,8 +7,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import pages.base.BasePage;
-import pages.listing.AuthListing;
-import pages.login.LoginPage;
+import pages.mainPage.MainPage;
 
 import static common.Config.CLEAR_COOKIES_AND_STORAGE;
 import static common.Config.HOLD_BROWSER_OPEN;
@@ -16,15 +15,13 @@ import static common.Config.HOLD_BROWSER_OPEN;
 public class BaseTest {
     protected WebDriver driver;
     protected BasePage basePage;
-    protected LoginPage loginPage;
-    protected AuthListing authListing;
+    protected MainPage loginPage;
 
     @BeforeSuite
     public void setUp() {
         driver = CommonActions.createDriver();
         basePage = new BasePage(driver);
-        loginPage = new LoginPage(driver);
-        authListing = new AuthListing(driver);
+        loginPage = new MainPage(driver);
     }
 
 
