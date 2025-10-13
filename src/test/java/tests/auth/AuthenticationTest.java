@@ -34,7 +34,7 @@ public class AuthenticationTest extends BaseTest {
 
 
         Assert.assertTrue(captchaPage.isCaptchaPresent(), "Captcha checkbox должен присутствовать на странице после попытки входа");
-    }}
+    }
 
 
     @Test
