@@ -18,11 +18,6 @@ public class BasePage {
         this.driver = driver;
     }
 
-    public void open(String url) {
-        driver.get(url);
-    }
-
-
 
     public WebElement waitElementIsVisible(By locator) {
         return new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT))

@@ -8,6 +8,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import pages.base.BasePage;
 import pages.mainPage.MainPage;
+import pages.mainPage.CaptchaPage;
+
 
 import static common.Config.CLEAR_COOKIES_AND_STORAGE;
 import static common.Config.HOLD_BROWSER_OPEN;
@@ -16,6 +18,7 @@ public class BaseTest {
     protected WebDriver driver;
     protected BasePage basePage;
     protected MainPage loginPage;
+    protected CaptchaPage captchaPage;
 
     @BeforeSuite
     public void setUp() {

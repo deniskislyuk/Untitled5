@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import static common.Config.PLATFORM_AND_BROWSER;
 import static constants.Constant.IMPLICIT_WAIT;
@@ -38,7 +38,7 @@ public class CommonActions {
         }
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICIT_WAIT));
         return driver;
     }
 
