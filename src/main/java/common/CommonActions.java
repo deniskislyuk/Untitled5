@@ -21,6 +21,7 @@ public class CommonActions {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
         options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
         options.addArguments("--disable-autofill");
         options.addArguments("--disable-save-password-brompt");
         options.addArguments("--disable-password-encryption");
