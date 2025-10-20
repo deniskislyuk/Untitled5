@@ -1,6 +1,6 @@
 package pages.mainPage;
 
-import io.qameta.allure.Step;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pages.base.BasePage;
@@ -17,29 +17,29 @@ public class MainPage extends BasePage {
     public MainPage(WebDriver driver) {
         super(driver);
     }
-    MainPage mainPage = new MainPage(driver);
 
 
 
-@Step("Вводим логин")
+
+
     public MainPage sendLogin(String login) {
         System.out.println("Вводим логин");
         waitElementToBeClickable(loginInput).sendKeys(login);
         return this;
     }
-    @Step("Вводим пароль")
+
     public MainPage sendPassword(String password) {
         System.out.println("Вводим пароль");
         waitElementIsVisible(passwordInput).sendKeys(password);
         return this;
     }
-    @Step("Нажимаем кнопку 'Войти'")
+
     public MainPage clickEnterBTN() {
         System.out.println("Нажимаем кнопку 'Войти'");
         waitElementToBeClickable(enterSubmit).click();
         return this;
     }
-    @Step("Нажимаем кнопку 'Вход'")
+
     public MainPage enterButton() {
         System.out.println("Нажимаем кнопку 'Вход'");
         waitElementToBeClickable(enterButton).click();

@@ -13,6 +13,6 @@ public class Config {
     public static final Boolean HOLD_BROWSER_OPEN = true;
 
     // Передается название страницы "regres" или "test"
-    public static final String TEST_URL = "test";
+    public static final String TEST_URL = "regres";
 
 }
