@@ -11,7 +11,6 @@ import java.time.Duration;
 import static common.Config.PLATFORM_AND_BROWSER;
 import static constants.Constant.IMPLICIT_WAIT;
 
-
 public class CommonActions {
 
     public static WebDriver createDriver() {
@@ -19,32 +18,49 @@ public class CommonActions {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--incognito");
-        options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
         options.addArguments("--no-sandbox");
+        options.addArguments("--incognito");
+        //options.addArguments("--headless=new");
         options.addArguments("--disable-autofill");
         options.addArguments("--disable-save-password-brompt");
+        options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-password-encryption");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         options.setExperimentalOption("useAutomationExtension", false);
+        options.addArguments("--window-size=1920,1200");
 
-        WebDriver driver;
+        WebDriver driver = null;
 
-        switch (PLATFORM_AND_BROWSER.toLowerCase()) {
-            case "win_chrome":
-                driver = new ChromeDriver(options);
-                break;
-            default:
-                Assert.fail("Invalid Platform or Browser: " + PLATFORM_AND_BROWSER);
-                return null;
+        try {
+            switch (PLATFORM_AND_BROWSER.toLowerCase()) {
+                case "win_chrome":
+                    driver = new ChromeDriver(options);
+                    break;
+                default:
+                    Assert.fail("Invalid Platform or Browser: " + PLATFORM_AND_BROWSER);
+
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to create WebDriver instance: " + e.getMessage());
+            e.printStackTrace();
         }
 
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICIT_WAIT));
+        if (driver != null) {
+            System.out.println("WebDriver created successfully.");
+            driver.manage().window().maximize();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICIT_WAIT));
+        } else {
+            System.err.println("WebDriver creation failed. Returning null.");
+        }
         return driver;
     }
 
     public static void openPage(WebDriver driver) {
+        if (driver == null) {
+            System.err.println("WebDriver instance is null in openPage(). Cannot open page.");
+            throw new IllegalStateException("WebDriver instance is not initialized.");
+        }
         String url = PageSwitcher.getPageUrl(Config.TEST_URL);
         driver.get(url);
     }
