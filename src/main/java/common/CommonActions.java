@@ -16,7 +16,7 @@ public class CommonActions {
 
     public static WebDriver createDriver() {
         System.out.println("Creating WebDriver");
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
