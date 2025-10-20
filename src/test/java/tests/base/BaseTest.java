@@ -3,48 +3,56 @@ package tests.base;
 import common.CommonActions;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterMethod; // Изменено
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeMethod; // Изменено
 import pages.base.BasePage;
 import pages.mainPage.MainPage;
 import pages.mainPage.CaptchaPage;
-
 
 import static common.Config.CLEAR_COOKIES_AND_STORAGE;
 import static common.Config.HOLD_BROWSER_OPEN;
 
 public class BaseTest {
-    protected WebDriver driver;
+    // Используем ThreadLocal для потокобезопасного хранения драйвера
+    private static final ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
     protected BasePage basePage;
     protected MainPage loginPage;
     protected CaptchaPage captchaPage;
 
-    @BeforeSuite
+    @BeforeMethod // Создаём драйвер перед КАЖДЫМ тестом
     public void setUp() {
-        driver = CommonActions.createDriver();
-        basePage = new BasePage(driver);
-        loginPage = new MainPage(driver);
+        WebDriver driver = CommonActions.createDriver();
+        if (driver != null) {
+            driverThread.set(driver);
+        } else {
+            throw new IllegalStateException("Failed to create WebDriver instance.");
+        }
+        basePage = new BasePage(getDriver());
+        loginPage = new MainPage(getDriver());
     }
 
+    public WebDriver getDriver() {
+        return driverThread.get();
+    }
 
-    @AfterTest
+    @AfterMethod // Очищаем куки и хранилище после каждого теста
     public void clearCookiesAndLocalStorage() {
-        if (CLEAR_COOKIES_AND_STORAGE){
-            JavascriptExecutor javascriptExecutor = (JavascriptExecutor)driver;
-            driver.manage().deleteAllCookies();
-            javascriptExecutor.executeScript ("window.sessionStorage.clear()");
+        if (CLEAR_COOKIES_AND_STORAGE) {
+            JavascriptExecutor javascriptExecutor = (JavascriptExecutor) getDriver();
+            getDriver().manage().deleteAllCookies();
+            javascriptExecutor.executeScript("window.sessionStorage.clear()");
         }
         System.out.println("Почистил куки");
     }
 
-    @AfterSuite (alwaysRun = true)
+    @AfterMethod // Закрываем браузер после КАЖДОГО теста
     public void close() {
-        if (HOLD_BROWSER_OPEN) {
+        WebDriver driver = getDriver();
+        if (driver != null) {
             driver.quit();
+            driverThread.remove();
         }
         System.out.println("Закрыл браузер");
     }
-
-
 }

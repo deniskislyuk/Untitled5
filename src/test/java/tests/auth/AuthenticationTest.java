@@ -21,8 +21,8 @@ public class AuthenticationTest extends BaseTest {
 
     @Test(description = "Логин")
     public void checkIsRedirect() {
-        openPage(driver);
-        MainPage mainPage = new MainPage(driver);
+        openPage(getDriver());
+        MainPage mainPage = new MainPage(getDriver());
         mainPage
                 .enterButton()
                 .sendLogin(LOGIN)
@@ -30,7 +30,7 @@ public class AuthenticationTest extends BaseTest {
                 .clickEnterBTN();
 
         System.out.println("Проверяю наличие каптчи");
-        CaptchaPage captchaPage = new CaptchaPage(driver);
+        CaptchaPage captchaPage = new CaptchaPage(getDriver());
 
 
         Assert.assertTrue(captchaPage.isCaptchaPresent(), "Captcha checkbox должен присутствовать на странице после попытки входа");
@@ -39,14 +39,14 @@ public class AuthenticationTest extends BaseTest {
 
     @Test
     public void checkLogin() {
-        openPage(driver);
-        MainPage mainPage = new MainPage(driver);
+        openPage(getDriver());
+        MainPage mainPage = new MainPage(getDriver());
         mainPage.enterButton()
                 .sendLogin("qwerty@gmail.com")
                 .sendPassword(PASSWORD)
                 .clickEnterBTN();
         System.out.println("Проверяю наличие каптчи");
-        CaptchaPage captchaPage = new CaptchaPage(driver);
+        CaptchaPage captchaPage = new CaptchaPage(getDriver());
 
 
         Assert.assertFalse(captchaPage.isCaptchaPresent(), "Captcha checkbox должен отсутствовать на странице после попытки входа");
@@ -54,14 +54,14 @@ public class AuthenticationTest extends BaseTest {
 
     @Test
     public void checkPassword() {
-        openPage(driver);
-        MainPage mainPage = new MainPage(driver);
+        openPage(getDriver());
+        MainPage mainPage = new MainPage(getDriver());
         mainPage.enterButton()
                 .sendLogin(LOGIN)
                 .sendPassword("123")
                 .clickEnterBTN();
         System.out.println("Проверяю наличие каптчи");
-        CaptchaPage captchaPage = new CaptchaPage(driver);
+        CaptchaPage captchaPage = new CaptchaPage(getDriver());
 
 
         Assert.assertTrue(captchaPage.isCaptchaPresent(), "Captcha checkbox должен отсутствовать на странице после попытки входа");
@@ -76,8 +76,8 @@ public class AuthenticationTest extends BaseTest {
 
     @Test(dataProvider = "invalidLogins", description = "Проверка поля 'Логин' на невалидные символы")
     public void invalidSymbolsLoginTest(String arg) {
-        openPage(driver);
-        MainPage mainPage = new MainPage(driver);
+        openPage(getDriver());
+        MainPage mainPage = new MainPage(getDriver());
         mainPage.enterButton();
         String actualText = loginPage.sendTextToLoginInputIdAndGetTextFromField(arg);
         Assert.assertFalse(actualText.isEmpty(),
@@ -91,8 +91,8 @@ public class AuthenticationTest extends BaseTest {
     }
     @Test(dataProvider = "invalidPassword", description = "Проверка поля 'Пароль' на невалидные символы")
     public void invalidSymbolsPasswordTest(String arg) {
-        openPage(driver);
-        MainPage mainPage = new MainPage(driver);
+        openPage(getDriver());
+        MainPage mainPage = new MainPage(getDriver());
         mainPage.enterButton();
         String actualText = loginPage.sendTextToPasswordInputAndGetTextFromField(arg);
         Assert.assertFalse(actualText.isEmpty(),
@@ -102,8 +102,8 @@ public class AuthenticationTest extends BaseTest {
 
     @Test(description = "Проверка элементов страницы")
         public void firstPageTest() {
-            openPage(driver);
-            MainPage mainPage = new MainPage(driver);
+            openPage(getDriver());
+            MainPage mainPage = new MainPage(getDriver());
 
             SoftAssert softAssert = new SoftAssert();
             softAssert.assertEquals(mainPage.getEnterButtonText(), "Вход", "Текст кнопки входа неверен");
