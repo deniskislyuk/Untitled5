@@ -21,7 +21,7 @@ public class CommonActions {
         options.addArguments("--disable-gpu");
         options.addArguments("--no-sandbox");
         options.addArguments("--incognito");
-        //options.addArguments("--headless=new");
+        options.addArguments("--headless=new");
         options.addArguments("--disable-autofill");
         options.addArguments("--disable-save-password-brompt");
         options.addArguments("--disable-dev-shm-usage");
@@ -29,6 +29,8 @@ public class CommonActions {
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         options.setExperimentalOption("useAutomationExtension", false);
         options.addArguments("--window-size=1920,1200");
+        options.addArguments("--user-data-dir=/tmp/selenium-user-data-" + System.currentTimeMillis());
+
 
         WebDriver driver = null;
 
