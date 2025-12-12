@@ -3,6 +3,7 @@ package pages.base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -16,18 +17,17 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-    }
+     }
 
 
-    public WebElement waitElementIsVisible(By locator) {
+    public WebElement waitElementIsVisible(WebElement element) {
         return new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT))
-                .until(ExpectedConditions.visibilityOfElementLocated(locator));
+                .until(ExpectedConditions.visibilityOf(element));
     }
 
-    public WebElement waitElementToBeClickable(By locator) {
+    public WebElement waitElementToBeClickable(WebElement element) {
         return new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT))
-                .until(ExpectedConditions.elementToBeClickable(locator));
+                .until(ExpectedConditions.elementToBeClickable(element));
     }
-
 
 }

@@ -21,7 +21,7 @@ public class CommonActions {
         options.addArguments("--disable-gpu");
         options.addArguments("--no-sandbox");
         options.addArguments("--incognito");
-        options.addArguments("--headless=new");
+       // options.addArguments("--headless=new");
         options.addArguments("--disable-autofill");
         options.addArguments("--disable-save-password-brompt");
         options.addArguments("--disable-dev-shm-usage");

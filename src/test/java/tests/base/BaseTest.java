@@ -4,21 +4,23 @@ import common.CommonActions;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod; // Изменено
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod; // Изменено
+import org.testng.annotations.BeforeTest;
 import pages.base.BasePage;
-import pages.mainPage.MainPage;
-import pages.mainPage.CaptchaPage;
+import pages.loginPage.LoginPage;
+import pages.startPage.StartPage;
+
 
 import static common.Config.CLEAR_COOKIES_AND_STORAGE;
-import static common.Config.HOLD_BROWSER_OPEN;
+import static constants.Constant.LOGIN;
+import static constants.Constant.PASSWORD;
 
 public class BaseTest {
     // Используем ThreadLocal для потокобезопасного хранения драйвера
     private static final ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
     protected BasePage basePage;
-    protected MainPage loginPage;
-    protected CaptchaPage captchaPage;
+    protected LoginPage loginPage;
+    protected StartPage startPage;
 
     @BeforeMethod // Создаём драйвер перед КАЖДЫМ тестом
     public void setUp() {
@@ -29,7 +31,7 @@ public class BaseTest {
             throw new IllegalStateException("Failed to create WebDriver instance.");
         }
         basePage = new BasePage(getDriver());
-        loginPage = new MainPage(getDriver());
+        loginPage = new LoginPage(getDriver());
     }
 
     public WebDriver getDriver() {
